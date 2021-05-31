@@ -2,6 +2,8 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+/[Aa]ssets/StarterKit/
+/[Aa]ssets/TopDown 2D RPG BE3/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
