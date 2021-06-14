@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public Transform playerTrm;
     public int stair;
 
-
+    public bool isBossClear = false;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         arrow[0].isUp = !arrow[0].isUp;
         for (int i = 0; i < arrow.Length; i++)
         {
-            if (arrow[0].isUp)
+            if (!arrow[0].isUp)
             {
                 arrow[i].spriteRenderer.sprite = arrow[i].sprites[0];
             }

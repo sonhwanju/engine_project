@@ -4,27 +4,34 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    private bool isTp = false;
+    public Transform targetTrm;
+    public Transform targetTrm2;
+    private BoxCollider2D[] doorBox;
+    private bool isOpen = false;
 
-    public Transform[] ptTrm = new Transform[2];
-
-    private void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        if(other.CompareTag("Player"))
+        doorBox = GetComponents<BoxCollider2D>();
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
         {
-            //할일작성
-            if(isTp)
+            //페이드인 아웃 넣어주기 해야함.
+            if(!isOpen)
             {
-                transform.position = ptTrm[0].position;
-
-
-                isTp = false;
+                other.transform.position = targetTrm.position;
+                for (int i = 0; i < doorBox.Length; i++)
+                {
+                    doorBox[i].enabled = false;
+                }
             }
             else
             {
-                transform.position = ptTrm[1].position;
-                isTp = true;
+                other.transform.position = targetTrm2.position;
             }
+            isOpen = !isOpen;
         }
     }
+
 }

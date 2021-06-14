@@ -4,20 +4,16 @@ using UnityEngine;
 
 public class Enemy1 : MonoBehaviour
 {
-    Vector2 radius;
-    void Start()
-    {
-        radius = new Vector2(12f, 5f);
-    }
-
+    [SerializeField]
+    private int hp = 100;
+    
     void Update()
     {
-         //Physics2D.OverlapBox(transform.position, radius,0);
+         
     }
 
-    private void OnDrawGizmosSelected()
+    public void PhaseOne()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, radius);
+
     }
 }
