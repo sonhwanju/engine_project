@@ -10,7 +10,8 @@ public class ArrowSwitch : MonoBehaviour
 
     private void Start()
     {
-        isUp = true;
+        isUp = false;
+        GameManager.instance.SwitchArrowSprite();
         //spriteRenderer = GetComponent<SpriteRenderer>();
     }
 }

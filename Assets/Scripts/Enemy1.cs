@@ -6,14 +6,18 @@ public class Enemy1 : MonoBehaviour
 {
     [SerializeField]
     private int hp = 100;
+
+    private WaitForSeconds ws = new WaitForSeconds(1f);
     
     void Update()
     {
          
     }
 
-    public void PhaseOne()
+
+    IEnumerator PhaseOne()
     {
 
+        yield return ws;
     }
 }

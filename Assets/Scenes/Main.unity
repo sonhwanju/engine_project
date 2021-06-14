@@ -138,6 +138,8 @@ GameObject:
   - component: {fileID: 224905787}
   - component: {fileID: 224905786}
   - component: {fileID: 224905783}
+  - component: {fileID: 224905788}
+  - component: {fileID: 224905789}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -184,7 +186,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -896604661
   m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -6201299510922417820, guid: e099a40fb4e474d6c8d200dfc039dc78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -298,6 +300,32 @@ MonoBehaviour:
   v: 0
   isSpace: 0
   isRun: 0
+  isFire: 0
+--- !u!114 &224905788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224905780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da93d626892591a48aa7df05aca84d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 7058115929550522512, guid: fc2e26abedd3e554fa36115c800a0674, type: 3}
+--- !u!114 &224905789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224905780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0e0b68c05a56e46983bff26da7b143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &294903109
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,9 +555,9 @@ GameObject:
   - component: {fileID: 770298146}
   - component: {fileID: 770298145}
   - component: {fileID: 770298144}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OutLayer
-  m_TagString: Untagged
+  m_TagString: Out
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10085,7 +10113,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1549748693
 MonoBehaviour:
@@ -12624,7 +12652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4178662102707208696, guid: 3601154fd6caa42789063455fb7c11fb, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4178662102707208696, guid: 3601154fd6caa42789063455fb7c11fb, type: 3}
       propertyPath: m_LocalPosition.x
