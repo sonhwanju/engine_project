@@ -9,6 +9,7 @@ TagManager:
   - Door
   - Out
   - Exit
+  - Bullet
   layers:
   - Default
   - TransparentFX

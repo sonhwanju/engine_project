@@ -5,16 +5,27 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float bulletSpeed = 20f;
+    public int damage = 1;
 
     void Update()
     {
-        transform.Translate(Vector2.right * bulletSpeed * Time.deltaTime);
+        
     }
-    void OnCollisionEnter2D(Collision2D col)
+
+    void FixedUpdate()
     {
-        if(col.gameObject.CompareTag("Out")) {
+        transform.Translate(Vector2.right * bulletSpeed * Time.fixedDeltaTime);
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Out")) {
             gameObject.SetActive(false);
-            Debug.Log("충돌");
+        }
+
+        IDamageable id = other.GetComponent<IDamageable>();
+        if(id!= null) {
+            id.OnDamage(damage);
+            gameObject.SetActive(false);
         }
     }
 }

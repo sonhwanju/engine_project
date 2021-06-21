@@ -9,12 +9,12 @@ public class enemyBullet : MonoBehaviour
     private void Start()
     {
         Destroy(gameObject, 2f);
-        //ÀÏ´Ü µð½ºÆ®·ÎÀÌ·Î
+        //ï¿½Ï´ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½Ì·ï¿½
     }
 
     private void Update()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime, Space.Self);
-        Enemy1.santanWait -= Time.deltaTime;
+       // Enemy1.santanWait -= Time.deltaTime;
     }
 }

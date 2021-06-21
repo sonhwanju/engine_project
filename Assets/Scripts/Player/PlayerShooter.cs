@@ -13,7 +13,7 @@ public class PlayerShooter : MonoBehaviour
     private void Awake()
     {
         input = GetComponent<PlayerInput>();
-        PoolManager.CreatePool<Bullet>(bulletPrefab,transform,20);
+        PoolManager.CreatePool<Bullet>(bulletPrefab,poolTrm,20);
     }
 
     private void Update()
@@ -26,8 +26,11 @@ public class PlayerShooter : MonoBehaviour
         {
             if(input.isFire && GameManager.instance.floor == Floor.THREE)
             {
-                Bullet obj = PoolManager.GetItem<Bullet>();
-                //  obj.transform.position = transform.position;
+                for(int i = -1; i < 2; i++) {
+                    Bullet obj = PoolManager.GetItem<Bullet>();
+                    obj.transform.position = transform.position + new Vector3(i * 0.3f,0,0);
+                }
+
                 input.isFire = false;
             }
             yield return ws;

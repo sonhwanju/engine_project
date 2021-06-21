@@ -9,7 +9,7 @@ public enum Boss
     PHASETWO = 1
 }
 
-public class Enemy1 : MonoBehaviour
+public class Enemy1 : MonoBehaviour,IDamageable
 {
     [SerializeField]
     private int hp;
@@ -17,6 +17,8 @@ public class Enemy1 : MonoBehaviour
 
     private WaitForSeconds ws = new WaitForSeconds(0.5f);
     private WaitForSeconds wfs = new WaitForSeconds(.7f);
+    private WaitForSeconds oneSec = new WaitForSeconds(1f);
+    private WaitForSeconds fiveSecond = new WaitForSeconds(5f);
     
     public float rot_speed;
     public Transform pos;
@@ -35,9 +37,10 @@ public class Enemy1 : MonoBehaviour
     private float shotStartWaitTime = 5f;
     private Boss boss = Boss.PHASEONE;
     public Image hpBar;
+    private bool isDie = false;
 
-    public static float santanWait;
-    private float startSantanWait = 1f;
+    public float santanWait;
+    private float startSantanWait = 3f;
 
     private void Start()
     {
@@ -45,6 +48,7 @@ public class Enemy1 : MonoBehaviour
         randomTrm = Random.Range(0, patrolTrm.Length);
         shotWaitTime = shotStartWaitTime;
         santanWait = startSantanWait;
+        StartCoroutine(CideShotCo());
     }
 
     void OnEnable()
@@ -55,10 +59,29 @@ public class Enemy1 : MonoBehaviour
 
     void Update()
     {
-        UIUpdate();
         Patrolling();
         ShotTime();
+        
+        if(santanWait <= 0) {
+            StartCoroutine(ShotgunCo());
+            santanWait = startSantanWait;
+        }
+        else {
+            santanWait-=Time.deltaTime;
+        }
     }
+
+    public void OnDamage(int damage) {
+        hp-=damage;
+        UIUpdate();
+    }
+    IEnumerator SpawnEnemy() {
+        while(boss == Boss.PHASETWO) {
+
+            yield return fiveSecond;
+        }
+    }
+
     public void UIUpdate() {
         hpBar.fillAmount = ((float)hp / (float)maxHp); 
     }
@@ -128,29 +151,8 @@ public class Enemy1 : MonoBehaviour
             }
         }
     }
-    //IEnumerator SpinShotCo()
-    //{
-    //    while (spinCount <= 80)
-    //    {
-    //        yield return wfs;
-    //        SpinShot();
-    //    }
-    //    spinCount = 0;
-    //    yield break;
-    //}
-
     void SpinShot()
     {
-        //for (int i = 10; i < 100; i++)
-        //{
-        //    spinPos.transform.Rotate(Vector3.forward * rot_speed * 50 * Time.deltaTime);
-
-        //    GameObject obj = Instantiate(bulletPrefab);
-
-        //    obj.transform.position = spinPos.transform.position;
-
-        //    obj.transform.rotation = spinPos.transform.rotation;
-        //}
         spinPos.transform.Rotate(Vector3.forward * rot_speed * 50 * Time.deltaTime);
 
         GameObject obj = Instantiate(bulletPrefab);
@@ -178,10 +180,13 @@ public class Enemy1 : MonoBehaviour
 
     IEnumerator CideShotCo()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            CideShot();
-            yield return ws;
+        while(!isDie) {
+            for (int i = 0; i < 3; i++)
+            {
+                CideShot();
+                yield return ws;
+            }
+            yield return oneSec;
         }
         yield break;
     }

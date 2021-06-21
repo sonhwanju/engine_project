@@ -11,7 +11,7 @@ public class Door : MonoBehaviour
     private BoxCollider2D[] doorBox;
     private bool isOpen = false;
     public GameObject colObj;
-    private bool isCheck = false;
+    //private bool isCheck = false;
 
     public float fadeTime = 2f;
     public Image fadeImg;
