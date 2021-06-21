@@ -52,6 +52,10 @@ public class Door : MonoBehaviour
             }
             else
             {
+                for (int i = 0; i < doorBox.Length; i++)
+                {
+                    doorBox[i].enabled = false;
+                }
                 other.transform.position = targetTrm2.position;
             }
             isOpen = !isOpen;

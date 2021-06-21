@@ -7,9 +7,13 @@ public class PlayerShooter : MonoBehaviour
     PlayerInput input;
     private WaitForSeconds ws = new WaitForSeconds(0.3f);
 
+    public GameObject bulletPrefab;
+    public Transform poolTrm;
+
     private void Awake()
     {
         input = GetComponent<PlayerInput>();
+        PoolManager.CreatePool<Bullet>(bulletPrefab,transform,20);
     }
 
     private void Update()
@@ -22,8 +26,8 @@ public class PlayerShooter : MonoBehaviour
         {
             if(input.isFire && GameManager.instance.floor == Floor.THREE)
             {
-                GameObject obj = BulletPool.instance.GetQueue();
-                //Debug.Log("น฿ป็");
+                Bullet obj = PoolManager.GetItem<Bullet>();
+                //  obj.transform.position = transform.position;
                 input.isFire = false;
             }
             yield return ws;

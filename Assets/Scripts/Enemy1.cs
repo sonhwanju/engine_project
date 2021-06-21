@@ -55,40 +55,12 @@ public class Enemy1 : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.K))
-        {
-            SpinShot();
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(ShotgunCo());
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            GoToShot();
-        }
-        if(Input.GetKeyDown(KeyCode.Z))
-        {
-            StartCoroutine(CideShotCo());
-        }
-        BossPt();
-
         UIUpdate();
+        Patrolling();
+        ShotTime();
     }
     public void UIUpdate() {
-        //0~1
         hpBar.fillAmount = ((float)hp / (float)maxHp); 
-    }
-
-    public void BossPt() {
-        Patrolling();
-        //페이즈에따른 함수들 넣기
-        if(boss == Boss.PHASEONE) {
-            
-        } 
-        else if(boss == Boss.PHASETWO) {
-
-        }
     }
 
     private void ShotTime()

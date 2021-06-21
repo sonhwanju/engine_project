@@ -10,19 +10,11 @@ public class Bullet : MonoBehaviour
     {
         transform.Translate(Vector2.right * bulletSpeed * Time.deltaTime);
     }
-
-    //private void OnCollisionEnter2D(Collision2D col)
-    //{
-    //    if(col.gameObject.CompareTag("Out"))
-    //    {
-    //        BulletPool.instance.InsertQueue(gameObject);
-    //    }
-    //}
-    private void OnTriggerEnter2D(Collider2D col)
+    void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.CompareTag("Out"))
-        {
-            BulletPool.instance.InsertQueue(gameObject);
+        if(col.gameObject.CompareTag("Out")) {
+            gameObject.SetActive(false);
+            Debug.Log("충돌");
         }
     }
 }
