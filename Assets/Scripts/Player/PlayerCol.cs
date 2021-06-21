@@ -11,7 +11,9 @@ public class PlayerCol : MonoBehaviour
             //Debug.Log("ontrigger");
             GameManager.instance.StairChange();
         }
-
+        if(other.CompareTag("Exit")) {
+            //게임 클리어
+        }
     }
 
 }

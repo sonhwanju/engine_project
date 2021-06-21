@@ -11,10 +11,10 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
-        isSpace = Input.GetButtonDown("Jump");
-        isFire = Input.GetButtonDown("Fire1");
-        isRun = Input.GetKey(KeyCode.LeftShift);
+            h = Input.GetAxisRaw("Horizontal");
+            v = Input.GetAxisRaw("Vertical");
+            isSpace = Input.GetButtonDown("Jump");
+            isFire = Input.GetButtonDown("Fire1");
+            isRun = Input.GetKey(KeyCode.LeftShift);
     }
 }

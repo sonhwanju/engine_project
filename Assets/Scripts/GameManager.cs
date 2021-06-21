@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+public enum Floor
+{
+    THREE,
+    TWO,
+    ONE
+}
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [Header("½ºÀ§Ä¡ + °è´Ü°ü·Ã º¯¼öµé")]
+    [Header("ìŠ¤ìœ„ì¹˜ + ê³„ë‹¨ê´€ë ¨ ë³€ìˆ˜ë“¤")]
     public ArrowSwitch[] arrow;
     public Transform[] stairTrm;
     public Transform playerTrm;
     public int stair;
-
+    public Floor floor = Floor.THREE;
     public bool isBossClear = false;
+
+    public GameObject boss;
+    public GameObject bossBar;
+
+    public bool isFade = false;
 
     private void Awake()
     {
@@ -22,6 +35,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         stair = 2;
+    }
+    public void BossSpawn()
+    {
+        Screen.SetResolution(1080, 1920, true);
+        boss.SetActive(true);
+        bossBar.SetActive(true);
     }
 
 
@@ -42,18 +61,46 @@ public class GameManager : MonoBehaviour
     }
     public void StairChange()
     {
-        
-        //¿Ã¶ó°¥¼ö ÀÖ´Â Á¶°Ç : 1,2 ÃþÀÏ¶§ ³»·Á°¥¼öÀÖ´Â Á¶°Ç : 2,3ÃþÀÏ¶§
-        if(arrow[0].isUp && stair < 2)
-        {
-            stair++;
-            playerTrm.position = stairTrm[stair].position;
-        }
 
-        if(!arrow[0].isUp && stair > 0)
+        if(arrow[0].isUp)
         {
-            stair--;
-            playerTrm.position = stairTrm[stair].position;
+            if(floor == Floor.ONE)
+            {
+                stair = 1;
+                floor = Floor.TWO;
+            }
+            else if(floor == Floor.TWO)
+            {
+                stair = 2;
+                floor = Floor.THREE;
+            }
+            
         }
+        else
+        {
+            if(floor == Floor.THREE)
+            {
+                stair = 1;
+                floor = Floor.TWO;
+            }
+            else if(floor == Floor.TWO)
+            {
+                stair = 0;
+                floor = Floor.ONE;
+            }
+        }
+        playerTrm.position = stairTrm[stair].position;
+
+        //if(arrow[0].isUp && stair < 2)
+        //{
+        //    stair++;
+        //    playerTrm.position = stairTrm[stair].position;
+        //}
+
+        //if(!arrow[0].isUp && stair > 0)
+        //{
+        //    stair--;
+        //    playerTrm.position = stairTrm[stair].position;
+        //}
     }
 }

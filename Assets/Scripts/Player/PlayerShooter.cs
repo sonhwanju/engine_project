@@ -20,13 +20,14 @@ public class PlayerShooter : MonoBehaviour
     {
         while (true)
         {
-            if(input.isFire)
+            if(input.isFire && GameManager.instance.floor == Floor.THREE)
             {
                 GameObject obj = BulletPool.instance.GetQueue();
-                Debug.Log("발사");
+                //Debug.Log("발사");
                 input.isFire = false;
             }
             yield return ws;
         }
+        
     }
 }
