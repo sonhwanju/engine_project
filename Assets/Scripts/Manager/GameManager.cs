@@ -62,45 +62,47 @@ public class GameManager : MonoBehaviour
     public void StairChange()
     {
 
-        if(arrow[0].isUp)
-        {
-            if(floor == Floor.ONE)
-            {
-                stair = 1;
-                floor = Floor.TWO;
-            }
-            else if(floor == Floor.TWO)
-            {
-                stair = 2;
-                floor = Floor.THREE;
-            }
+        // if(arrow[0].isUp)
+        // {
+        //     if(floor == Floor.ONE)
+        //     {
+        //         stair = 1;
+        //         floor = Floor.TWO;
+        //     }
+        //     else if(floor == Floor.TWO)
+        //     {
+        //         stair = 2;
+        //         floor = Floor.THREE;
+        //     }
             
-        }
-        else
+        // }
+        // else
+        // {
+        //     if(floor == Floor.THREE)
+        //     {
+        //         stair = 1;
+        //         floor = Floor.TWO;
+        //     }
+        //     else if(floor == Floor.TWO)
+        //     {
+        //         stair = 0;
+        //         floor = Floor.ONE;
+        //     }
+        // }
+        // playerTrm.position = stairTrm[stair].position;
+
+        if(arrow[0].isUp && stair < 2)
         {
-            if(floor == Floor.THREE)
-            {
-                stair = 1;
-                floor = Floor.TWO;
-            }
-            else if(floor == Floor.TWO)
-            {
-                stair = 0;
-                floor = Floor.ONE;
-            }
+           stair++;
+           floor++;
+           playerTrm.position = stairTrm[stair].position;
         }
-        playerTrm.position = stairTrm[stair].position;
 
-        //if(arrow[0].isUp && stair < 2)
-        //{
-        //    stair++;
-        //    playerTrm.position = stairTrm[stair].position;
-        //}
-
-        //if(!arrow[0].isUp && stair > 0)
-        //{
-        //    stair--;
-        //    playerTrm.position = stairTrm[stair].position;
-        //}
+        if(!arrow[0].isUp && stair > 0)
+        {
+           stair--;
+           floor--;
+           playerTrm.position = stairTrm[stair].position;
+        }
     }
 }

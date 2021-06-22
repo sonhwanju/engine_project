@@ -24,10 +24,6 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if(input.isSpace)
-        {
-            GameManager.instance.SwitchArrowSprite();
-        }
         Keys();
     }
 
@@ -37,6 +33,11 @@ public class PlayerMove : MonoBehaviour
     }
     private void Keys()
     {
+        if(input.isSpace)
+        {
+            GameManager.instance.SwitchArrowSprite();
+        }
+
         if (input.isRun)
         {
             speed = 7f;

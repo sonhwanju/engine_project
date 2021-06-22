@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1669193597567064144}
   - component: {fileID: 1669193597567064145}
   - component: {fileID: 1669193597567064147}
+  - component: {fileID: 2944351440238313939}
+  - component: {fileID: 3125191063668578904}
   m_Layer: 8
   m_Name: enemyBullet 1
   m_TagString: Untagged
@@ -96,3 +98,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+--- !u!114 &2944351440238313939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669193597567064151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16b0d53e5358f14d85f64e2aadc3356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+--- !u!58 &3125191063668578904
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669193597567064151}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.004784989}
+  serializedVersion: 2
+  m_Radius: 0.43202013

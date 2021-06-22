@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public enum Boss
 {
-    PHASEONE = 0,
-    PHASETWO = 1
+    PHASEONE,
+    PHASETWO
 }
 
 public class Enemy1 : MonoBehaviour,IDamageable
@@ -60,20 +60,35 @@ public class Enemy1 : MonoBehaviour,IDamageable
     void Update()
     {
         Patrolling();
-        ShotTime();
-        
-        if(santanWait <= 0) {
-            StartCoroutine(ShotgunCo());
-            santanWait = startSantanWait;
+        if(boss == Boss.PHASEONE) {
+            ShotTime();
+            if(santanWait <= 0) {
+                StartCoroutine(ShotgunCo());
+                santanWait = startSantanWait;
+            }
+            else {
+                santanWait-=Time.deltaTime;
+            }    
         }
-        else {
-            santanWait-=Time.deltaTime;
+        else if(boss == Boss.PHASETWO) {
+            //StopCoroutine(CideShotCo());
         }
+            
     }
 
     public void OnDamage(int damage) {
         hp-=damage;
         UIUpdate();
+
+        if(hp <= 0) {
+            isDie = true;
+            Destroy(gameObject,1f);
+        }
+
+        if(hp <= (maxHp / 2 )) {
+            boss = Boss.PHASETWO;
+            
+        }
     }
     IEnumerator SpawnEnemy() {
         while(boss == Boss.PHASETWO) {
@@ -186,7 +201,7 @@ public class Enemy1 : MonoBehaviour,IDamageable
                 CideShot();
                 yield return ws;
             }
-            yield return oneSec;
+            yield return boss == Boss.PHASEONE ? oneSec : ws;
         }
         yield break;
     }

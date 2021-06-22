@@ -10324,6 +10324,7 @@ MonoBehaviour:
   - {fileID: 1228583849}
   speed: 10
   hpBar: {fileID: 1467885107}
+  santanWait: 0
 --- !u!50 &1307775084
 Rigidbody2D:
   serializedVersion: 4
