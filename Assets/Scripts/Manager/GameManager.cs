@@ -29,13 +29,16 @@ public class GameManager : MonoBehaviour
     public Transform poolTrm;
 
     public bool isFade = false;
-
+    public bool isOpen = false;
     public GameObject playerChild;
+    //1이면 라이트 2면 업 3이면 레프트
+    public int enemy2Check = 0;
 
     private void Awake()
     {
         instance = this;
         PoolManager.CreatePool<BloodEffect>(bloodEffect,poolTrm);
+        isOpen = false;
     }
 
     private void Start()

@@ -8,8 +8,7 @@ public class Door : MonoBehaviour
 {
     public Transform targetTrm;
     public Transform targetTrm2;
-    private BoxCollider2D[] doorBox;
-    private bool isOpen = false;
+    public BoxCollider2D[] doorBox;
     //public GameObject colObj;
     //private bool isCheck = false;
 
@@ -30,9 +29,13 @@ public class Door : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             //
-            if(!isOpen)
+            if(!GameManager.instance.isOpen)
             {
                 GameManager.instance.isFade = true;
+                for (int i = 0; i < doorBox.Length; i++)
+                {
+                    doorBox[i].enabled = false;
+                }
                 fadeImg.DOFade(1, 2).OnComplete(() =>
                 {
                     other.transform.position = targetTrm.position;
@@ -41,11 +44,8 @@ public class Door : MonoBehaviour
                          GameManager.instance.BossSpawn();
                         //  colObj.SetActive(true);
                         //  colObj.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
-                         GameManager.instance.ActiveCircle(isOpen);
-                         for (int i = 0; i < doorBox.Length; i++)
-                         {
-                             doorBox[i].enabled = false;
-                         }
+                         GameManager.instance.ActiveCircle(GameManager.instance.isOpen);
+                         
                          GameManager.instance.isFade = false;
                      });
                 });
@@ -53,14 +53,20 @@ public class Door : MonoBehaviour
             }
             else
             {
-                for (int i = 0; i < doorBox.Length; i++)
-                {
-                    doorBox[i].enabled = true;
-                }
-                other.transform.position = targetTrm2.position;
-                GameManager.instance.ActiveCircle(isOpen);
+                GameManager.instance.isFade = true;
+                fadeImg.DOFade(1,2).OnComplete(()=> {
+                    for (int i = 0; i < doorBox.Length; i++)
+                    {
+                        doorBox[i].enabled = false;
+                    }
+                    other.transform.position = targetTrm2.position;
+                    fadeImg.DOFade(0,2).OnComplete(()=>{
+                        GameManager.instance.ActiveCircle(GameManager.instance.isOpen);
+                        GameManager.instance.isFade = false;
+                    });
+                }); 
             }
-            isOpen = !isOpen;
+            GameManager.instance.isOpen = !GameManager.instance.isOpen;
         }
     }
 

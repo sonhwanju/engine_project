@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour,IDamageable
 {
-    public int hp = 5;
+    public int hp = 10;
 
     public void OnDamage(int damage) {
         hp -= damage;

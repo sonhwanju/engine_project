@@ -19,4 +19,7 @@ public class enemyBullet : MonoBehaviour
     {
         transform.Translate(Vector2.right * speed * Time.fixedDeltaTime, Space.Self);
     }
+    public void SetSpeed(float speed = 5f) {
+        this.speed = speed;
+    }
 }
