@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e16b0d53e5358f14d85f64e2aadc3356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodEffect: {fileID: 7576755188866168136, guid: 0e2ec3126e485b348b87607c483e3f81, type: 3}
   damage: 1
 --- !u!58 &3125191063668578904
 CircleCollider2D:

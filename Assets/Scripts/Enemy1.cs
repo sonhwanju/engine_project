@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public enum Boss
 {
     PHASEONE,
-    PHASETWO
+    PHASETWO,
+    DEAD
 }
 
 public class Enemy1 : MonoBehaviour,IDamageable
@@ -17,7 +18,8 @@ public class Enemy1 : MonoBehaviour,IDamageable
 
     private WaitForSeconds ws = new WaitForSeconds(0.5f);
     private WaitForSeconds wfs = new WaitForSeconds(.7f);
-    private WaitForSeconds oneSec = new WaitForSeconds(1f);
+    private WaitForSeconds threeSec = new WaitForSeconds(3f);
+    private WaitForSeconds twoSec = new WaitForSeconds(2f);
     private WaitForSeconds fiveSecond = new WaitForSeconds(5f);
     
     public float rot_speed;
@@ -26,7 +28,11 @@ public class Enemy1 : MonoBehaviour,IDamageable
     //public Transform center;
     public GameObject bulletPrefab;
     public GameObject bulletPrefab2;
+    public GameObject enemy2;
+    //public GameObject spawnEnemy;
     public Transform target;
+
+    public Transform poolTrm;
 
     public Transform[] patrolTrm;
     private int randomTrm;
@@ -42,6 +48,12 @@ public class Enemy1 : MonoBehaviour,IDamageable
     public float santanWait;
     private float startSantanWait = 3f;
 
+    void Awake()
+    {
+        PoolManager.CreatePool<enemyBullet>(bulletPrefab,poolTrm, 50);
+        PoolManager.CreatePool<enemyBullet2>(bulletPrefab2,poolTrm, 20);
+        PoolManager.CreatePool<Enemy2>(enemy2,poolTrm,10);
+    }
     private void Start()
     {
         waitTime = startWaitTime;
@@ -60,28 +72,33 @@ public class Enemy1 : MonoBehaviour,IDamageable
     void Update()
     {
         Patrolling();
+        if(santanWait <= 0) {
+            StartCoroutine(ShotgunCo());
+            santanWait = startSantanWait;
+        }
+        else {
+            santanWait-=Time.deltaTime;
+        }
+
         if(boss == Boss.PHASEONE) {
             ShotTime();
-            if(santanWait <= 0) {
-                StartCoroutine(ShotgunCo());
-                santanWait = startSantanWait;
-            }
-            else {
-                santanWait-=Time.deltaTime;
-            }    
+            
         }
         else if(boss == Boss.PHASETWO) {
             //StopCoroutine(CideShotCo());
+            startSantanWait = 1f;
+            shotStartWaitTime = 4f;
         }
-            
+        
     }
 
     public void OnDamage(int damage) {
-        hp-=damage;
+        hp -= damage;
         UIUpdate();
 
         if(hp <= 0) {
             isDie = true;
+            boss = Boss.DEAD;
             Destroy(gameObject,1f);
         }
 
@@ -91,8 +108,11 @@ public class Enemy1 : MonoBehaviour,IDamageable
         }
     }
     IEnumerator SpawnEnemy() {
-        while(boss == Boss.PHASETWO) {
-
+        while(true) {
+            if(boss == Boss.PHASETWO) {
+                Enemy2 enemy = PoolManager.GetItem<Enemy2>();
+                //이제 어디서 생성될지 정해줘야한다.
+            }
             yield return fiveSecond;
         }
     }
@@ -126,14 +146,14 @@ public class Enemy1 : MonoBehaviour,IDamageable
 
         pos.rotation = Quaternion.Euler(0, 0, angle);
 
-        GameObject obj = Instantiate(bulletPrefab);
+        enemyBullet obj = PoolManager.GetItem<enemyBullet>();
         obj.transform.position = transform.position;
         obj.transform.rotation = pos.rotation;
 
         yield return wfs;
         for (int i = -1; i < 2; i++)
         {
-            GameObject obj2 = Instantiate(bulletPrefab2);
+            enemyBullet obj2 = PoolManager.GetItem<enemyBullet>();
             obj2.transform.position = obj.transform.position;
             obj2.transform.rotation = Quaternion.Euler(0, 0, angle + (i * 10));
         }
@@ -170,7 +190,7 @@ public class Enemy1 : MonoBehaviour,IDamageable
     {
         spinPos.transform.Rotate(Vector3.forward * rot_speed * 50 * Time.deltaTime);
 
-        GameObject obj = Instantiate(bulletPrefab);
+        enemyBullet obj = PoolManager.GetItem<enemyBullet>();
 
         obj.transform.position = spinPos.transform.position;
 
@@ -181,11 +201,9 @@ public class Enemy1 : MonoBehaviour,IDamageable
     {
         for (int i = 0; i < 360; i += 13)
         {
-            GameObject temp = Instantiate(bulletPrefab);
+            enemyBullet temp = PoolManager.GetItem<enemyBullet>();
             Vector2 targetDir = target.transform.position - temp.transform.position;
             float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
-
-            Destroy(temp, 2f);
 
             temp.transform.position = transform.position;
 
@@ -201,7 +219,7 @@ public class Enemy1 : MonoBehaviour,IDamageable
                 CideShot();
                 yield return ws;
             }
-            yield return boss == Boss.PHASEONE ? oneSec : ws;
+            yield return boss == Boss.PHASEONE ? threeSec : twoSec;
         }
         yield break;
     }
@@ -212,9 +230,7 @@ public class Enemy1 : MonoBehaviour,IDamageable
 
         for (int i = 0; i < 360; i += 13)
         {
-            GameObject obj = Instantiate(bulletPrefab2);
-
-            Destroy(obj, 2f);
+            enemyBullet2 obj = PoolManager.GetItem<enemyBullet2>();
 
             obj.transform.position = transform.position;
 

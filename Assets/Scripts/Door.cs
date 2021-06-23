@@ -10,7 +10,7 @@ public class Door : MonoBehaviour
     public Transform targetTrm2;
     private BoxCollider2D[] doorBox;
     private bool isOpen = false;
-    public GameObject colObj;
+    //public GameObject colObj;
     //private bool isCheck = false;
 
     public float fadeTime = 2f;
@@ -39,8 +39,9 @@ public class Door : MonoBehaviour
                     fadeImg.DOFade(0, 2).OnComplete(() =>
                      {
                          GameManager.instance.BossSpawn();
-                         colObj.SetActive(true);
-                         colObj.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
+                        //  colObj.SetActive(true);
+                        //  colObj.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
+                         GameManager.instance.ActiveCircle(isOpen);
                          for (int i = 0; i < doorBox.Length; i++)
                          {
                              doorBox[i].enabled = false;
@@ -54,9 +55,10 @@ public class Door : MonoBehaviour
             {
                 for (int i = 0; i < doorBox.Length; i++)
                 {
-                    doorBox[i].enabled = false;
+                    doorBox[i].enabled = true;
                 }
                 other.transform.position = targetTrm2.position;
+                GameManager.instance.ActiveCircle(isOpen);
             }
             isOpen = !isOpen;
         }

@@ -16,5 +16,6 @@ public class PlayerHealth : MonoBehaviour,IDamageable
 
     public void Die() {
         //죽었을때 해야할 것을 추가해야한다.
+        
     }
 }

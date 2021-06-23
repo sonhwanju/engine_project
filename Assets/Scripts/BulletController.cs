@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-        public int damage = 1;
+    
+    public int damage = 1;
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Out")) {
@@ -14,6 +15,8 @@ public class BulletController : MonoBehaviour
         IDamageable id = other.GetComponent<IDamageable>();
         if(id!= null) {
             id.OnDamage(damage);
+            BloodEffect effect = PoolManager.GetItem<BloodEffect>();
+            effect.ResetPosition(other.transform.position);
             gameObject.SetActive(false);
         }
     }

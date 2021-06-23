@@ -8,13 +8,15 @@ public class enemyBullet : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, 2f);
         //�ϴ� ��Ʈ���̷�
     }
 
-    private void Update()
+    // private void Update()
+    // {
+    //     transform.Translate(Vector2.right * speed * Time.deltaTime, Space.Self);
+    // }
+    private void FixedUpdate()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime, Space.Self);
-       // Enemy1.santanWait -= Time.deltaTime;
+        transform.Translate(Vector2.right * speed * Time.fixedDeltaTime, Space.Self);
     }
 }

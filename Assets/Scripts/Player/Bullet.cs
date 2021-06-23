@@ -6,11 +6,6 @@ public class Bullet : MonoBehaviour
 {
     private float bulletSpeed = 20f;
 
-    void Update()
-    {
-        
-    }
-
     void FixedUpdate()
     {
         transform.Translate(Vector2.right * bulletSpeed * Time.fixedDeltaTime);

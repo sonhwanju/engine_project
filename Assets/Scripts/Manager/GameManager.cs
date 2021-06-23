@@ -25,20 +25,33 @@ public class GameManager : MonoBehaviour
     public GameObject boss;
     public GameObject bossBar;
 
+    public GameObject bloodEffect;
+    public Transform poolTrm;
+
     public bool isFade = false;
+
+    public GameObject playerChild;
 
     private void Awake()
     {
         instance = this;
+        PoolManager.CreatePool<BloodEffect>(bloodEffect,poolTrm);
     }
 
     private void Start()
     {
         stair = 2;
+        
+    }
+
+    public void ActiveCircle(bool on) {
+        //Debug.Log(on);
+        playerChild.SetActive(on);
+        playerChild.transform.parent.GetComponent<BoxCollider2D>().enabled = !on;    
     }
     public void BossSpawn()
     {
-        Screen.SetResolution(1080, 1920, true);
+        //Screen.SetResolution(1080, 1920, true);
         boss.SetActive(true);
         bossBar.SetActive(true);
     }

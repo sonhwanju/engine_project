@@ -123,7 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee19214c117e7945b2158aa46110608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
 --- !u!114 &-3547332381875954758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,4 +135,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e16b0d53e5358f14d85f64e2aadc3356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodEffect: {fileID: 7576755188866168136, guid: 0e2ec3126e485b348b87607c483e3f81, type: 3}
   damage: 1

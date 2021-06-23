@@ -30,7 +30,6 @@ public class PlayerShooter : MonoBehaviour
                     Bullet obj = PoolManager.GetItem<Bullet>();
                     obj.transform.position = transform.position + new Vector3(i * 0.3f,0,0);
                 }
-
                 input.isFire = false;
             }
             yield return ws;
