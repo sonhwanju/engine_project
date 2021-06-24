@@ -33,10 +33,10 @@ public class PlayerMove : MonoBehaviour
     }
     private void Keys()
     {
-        if(input.isSpace)
-        {
-            GameManager.instance.SwitchArrowSprite();
-        }
+        // if(input.isSpace)
+        // {
+        //     GameManager.instance.SwitchArrowSprite();
+        // }
 
         if (input.isRun)
         {

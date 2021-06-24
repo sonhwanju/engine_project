@@ -22,9 +22,9 @@ public class PlayerShooter : MonoBehaviour
     }
     IEnumerator Shoot()
     {
-        while (true)
+        while (GameManager.instance.floor == Floor.THREE)
         {
-            if(input.isFire && GameManager.instance.floor == Floor.THREE)
+            if(input.isFire)
             {
                 for(int i = -1; i < 2; i++) {
                     Bullet obj = PoolManager.GetItem<Bullet>();

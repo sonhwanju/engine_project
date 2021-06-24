@@ -59,6 +59,11 @@ public class GameManager : MonoBehaviour
         bossBar.SetActive(true);
     }
 
+    void OnApplicationQuit()
+    {
+        SaveManager.instance.DataSave();
+    }
+
 
     public void SwitchArrowSprite()
     {
@@ -106,19 +111,31 @@ public class GameManager : MonoBehaviour
         //     }
         // }
         // playerTrm.position = stairTrm[stair].position;
-
-        if(arrow[0].isUp && stair < 2)
-        {
-           stair++;
-           floor++;
-           playerTrm.position = stairTrm[stair].position;
+        if(SaveManager.instance.save.checkList[0]) {
+            if(!arrow[0].isUp)
+            {
+                if(stair > 1) {
+                    stair--;
+                    floor--;
+                    playerTrm.position = stairTrm[stair].position;
+                }
+                else if(stair > 0) {
+                    if(SaveManager.instance.save.checkList[1]) {
+                        stair--;
+                        floor--;
+                        playerTrm.position = stairTrm[stair].position;
+                    }
+                }
+            }
         }
 
-        if(!arrow[0].isUp && stair > 0)
-        {
-           stair--;
-           floor--;
-           playerTrm.position = stairTrm[stair].position;
-        }
+        // if(arrow[0].isUp && stair < 2)
+        // {
+        //    stair++;
+        //    floor++;
+        //    playerTrm.position = stairTrm[stair].position;
+        // }
+
+        
     }
 }

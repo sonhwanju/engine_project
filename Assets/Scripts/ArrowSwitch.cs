@@ -11,7 +11,7 @@ public class ArrowSwitch : MonoBehaviour
     private void Start()
     {
         isUp = false;
-        GameManager.instance.SwitchArrowSprite();
+        //GameManager.instance.SwitchArrowSprite();
         //spriteRenderer = GetComponent<SpriteRenderer>();
     }
 }

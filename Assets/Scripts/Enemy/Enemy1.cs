@@ -118,6 +118,8 @@ public class Enemy1 : MonoBehaviour,IDamageable
             {
                 door.doorBox[i].enabled = true;
             }
+            SaveManager.instance.save.checkList[0] = true;
+            SaveManager.instance.DataSave();
             doorObj.SetActive(true);
             animator.Play(DeadToHash);
             Destroy(gameObject,0.5f);
