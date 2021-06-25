@@ -50,7 +50,8 @@ public class GameManager : MonoBehaviour
     public void ActiveCircle(bool on) {
         //Debug.Log(on);
         playerChild.SetActive(on);
-        playerChild.transform.parent.GetComponent<BoxCollider2D>().enabled = !on;    
+        playerChild.transform.parent.GetComponent<BoxCollider2D>().enabled = !on;
+        playerTrm.GetComponent<Rigidbody2D>().collisionDetectionMode = on ? CollisionDetectionMode2D.Continuous : CollisionDetectionMode2D.Discrete;  
     }
     public void BossSpawn()
     {

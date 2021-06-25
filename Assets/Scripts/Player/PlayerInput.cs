@@ -7,6 +7,8 @@ public class PlayerInput : MonoBehaviour
     public float h, v;
     public bool isSpace;
     public bool isRun;
+    public bool isFireDown;
+    public bool isFireUp;
     public bool isFire;
 
     private void Update()
@@ -14,7 +16,9 @@ public class PlayerInput : MonoBehaviour
             h = Input.GetAxisRaw("Horizontal");
             v = Input.GetAxisRaw("Vertical");
             isSpace = Input.GetButtonDown("Jump");
-            isFire = Input.GetButtonDown("Fire1");
+            isFireDown = Input.GetButtonDown("Fire1");
+            isFireUp = Input.GetButtonDown("Fire1");
+            isFire = Input.GetButton("Fire1");
             isRun = Input.GetKey(KeyCode.LeftShift);
     }
 }

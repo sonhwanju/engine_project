@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float speed = 5f;
 
-    Rigidbody2D rigid;
+    public Rigidbody2D rigid;
     PlayerInput input;
 
     private void Awake()

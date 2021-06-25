@@ -15,16 +15,16 @@ public class PlayerShooter : MonoBehaviour
         input = GetComponent<PlayerInput>();
         PoolManager.CreatePool<Bullet>(bulletPrefab,poolTrm,20);
     }
-
-    private void Update()
+    void Start()
     {
         StartCoroutine(Shoot());
     }
+
     IEnumerator Shoot()
     {
         while (GameManager.instance.floor == Floor.THREE)
         {
-            if(input.isFire)
+            if(input.isFireDown)
             {
                 for(int i = -1; i < 2; i++) {
                     Bullet obj = PoolManager.GetItem<Bullet>();
@@ -32,8 +32,8 @@ public class PlayerShooter : MonoBehaviour
                 }
                 input.isFire = false;
             }
-            yield return ws;
+            yield return null;
         }
-        
+        yield break;
     }
 }
