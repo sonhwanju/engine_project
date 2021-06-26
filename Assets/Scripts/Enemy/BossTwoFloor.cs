@@ -45,15 +45,18 @@ public class BossTwoFloor : MonoBehaviour
         if(GameManager.instance.score >= 10000 && !isDead) {
             isDead = true;
             SaveManager.instance.save.checkList[1] = true;
-            for (int i = 0; i < door.doorBox.Length; i++)
-            {
-                door.doorBox[i].enabled = true;
-            }
+            //for (int i = 0; i < door.doorBox.Length; i++)
+            //{
+                door.doorBox[1].enabled = true;
+            //}
             GameManager.instance.isOpen = true;
             colPoint.SetActive(true);
             animator.Play(deadToHash);
-            Destroy(gameObject, 1f);
+            Invoke("SetAct",1f);
         }
+    }
+    public void SetAct() {
+        gameObject.SetActive(false);
     }
 
     

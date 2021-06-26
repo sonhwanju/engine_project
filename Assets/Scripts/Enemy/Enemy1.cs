@@ -114,21 +114,24 @@ public class Enemy1 : MonoBehaviour,IDamageable
         if(hp <= 0) {
             isDie = true;
             boss = Boss.DEAD;
-            for (int i = 0; i < door.doorBox.Length; i++)
-            {
-                door.doorBox[i].enabled = true;
-            }
+            //for (int i = 0; i < door.doorBox.Length; i++)
+            //{
+                door.doorBox[1].enabled = true;
+            //}
             SaveManager.instance.save.checkList[0] = true;
             SaveManager.instance.DataSave();
             doorObj.SetActive(true);
             GameManager.instance.bossBar.SetActive(false);
             animator.Play(DeadToHash);
-            Destroy(gameObject,0.5f);
+            Invoke("SetAct",0.5f);
         }
 
         if(hp <= (maxHp / 2 )) {
             boss = Boss.PHASETWO;
         }
+    }
+    public void SetAct() {
+        gameObject.SetActive(false);
     }
     //사용
     IEnumerator SpawnEnemy() {

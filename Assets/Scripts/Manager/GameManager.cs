@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
     public Transform[] spawnTrms;
     public PlayerSleep sleep;
 
+    public GameObject boss3;
+    public PlayerAnswer answer;
+
     private void Awake()
     {
         instance = this;
@@ -61,6 +64,10 @@ public class GameManager : MonoBehaviour
     public void InitSpawn(Transform trm) {
         int a = (int)SaveManager.instance.save.floor;
         trm.position = spawnTrms[a].position;
+    }
+    public void InitThreeFloor(bool on) {
+        boss3.SetActive(on);
+        answer.enabled = on;
     }
     public void Timer() {
         sec+=Time.deltaTime;
