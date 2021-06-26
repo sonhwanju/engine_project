@@ -10,6 +10,7 @@ public class PlayerInput : MonoBehaviour
     public bool isFireDown;
     public bool isFireUp;
     public bool isFire;
+    public bool isHelp;
 
     private void Update()
     {
@@ -20,5 +21,6 @@ public class PlayerInput : MonoBehaviour
             isFireUp = Input.GetButtonUp("Fire1");
             isFire = Input.GetButton("Fire1");
             isRun = Input.GetKey(KeyCode.LeftShift);
+            isHelp = Input.GetKeyDown(KeyCode.K);
     }
 }
