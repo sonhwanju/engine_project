@@ -1,33 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BossTwoFloor : MonoBehaviour
 {
     public LayerMask whatIsPlayer;
     public Transform targetTrm;
-    private Vector2 myTrm;
-    private WaitForSeconds ws = new WaitForSeconds(2f);
-    private WaitForSeconds w = new WaitForSeconds(1f);
+    public Vector2 myTrm;
+    public float radius = 10f;
+    private WaitForSeconds ws = new WaitForSeconds(1.5f);
+    private WaitForSeconds w = new WaitForSeconds(.8f);
+    private WaitForSeconds zerotwo = new WaitForSeconds(0.2f);
 
+    private Animator animator;
+    private int searchToHash = Animator.StringToHash("search");
+    private int deadToHash = Animator.StringToHash("deadBossTwo");
+    private bool isDead = false;
+    Sequence seq;
+    public Door2 door;
+    public GameObject colPoint;
 
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     void Start()
     {
         myTrm = transform.position;
+        StartCoroutine(Move());
+        seq = DOTween.Sequence();
     }
 
-    IEnumerator Move() {
-        while(true) {
-            Vector2.Lerp(transform.position,targetTrm.position, 0.5f);
-            yield return w;
-            //여기에 플레이어 감지 추가하기
-            Collider2D col = Physics2D.OverlapCircle(transform.position, 10f, whatIsPlayer);
-            if(col.GetComponent<PlayerSleep>().isSleep) {
-                col.GetComponent<PlayerHealth>().OnDamage(1);
-            }
-            
-            yield return ws;
-            Vector2.Lerp(transform.position, myTrm, 0.5f);
+    void OnEnable()
+    {
+       
+    }
+    void Update()
+    {
+        if(SaveManager.instance.save.floor == Floor.TWO) {
+            GameManager.instance.Timer();
         }
+
+        if(GameManager.instance.score >= 10000 && !isDead) {
+            isDead = true;
+            SaveManager.instance.save.checkList[1] = true;
+            for (int i = 0; i < door.doorBox.Length; i++)
+            {
+                door.doorBox[i].enabled = true;
+            }
+            GameManager.instance.isOpen = true;
+            colPoint.SetActive(true);
+            animator.Play(deadToHash);
+            Destroy(gameObject, 1f);
+        }
+    }
+
+    
+
+    IEnumerator Move() {
+        while(!isDead && SaveManager.instance.save.floor == Floor.TWO) {
+
+            seq.Append(transform.DOMove(targetTrm.position, 1f));
+            yield return GameManager.instance.min >= 1 ? w : ws;
+            Collider2D col = Physics2D.OverlapCircle(transform.position, radius, whatIsPlayer);
+            animator.Play(searchToHash);
+            if(col != null) {
+                if(col.GetComponent<PlayerSleep>().isSleep) {
+                    col.GetComponent<PlayerHealth>().OnDamage(1);
+                }
+            }
+            yield return w;
+            seq.Append(transform.DOMove(myTrm,1f));
+            yield return GameManager.instance.min >= 1 ? w : ws;
+        }
+        yield break;
     }
 }

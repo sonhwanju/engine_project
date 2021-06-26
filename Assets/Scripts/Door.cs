@@ -41,7 +41,7 @@ public class Door : MonoBehaviour
                     other.transform.position = targetTrm.position;
                     fadeImg.DOFade(0, 2).OnComplete(() =>
                      {
-                         GameManager.instance.BossSpawn();
+                         GameManager.instance.BossSpawn(true);
                         //  colObj.SetActive(true);
                         //  colObj.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
                          GameManager.instance.ActiveCircle(GameManager.instance.isOpen);

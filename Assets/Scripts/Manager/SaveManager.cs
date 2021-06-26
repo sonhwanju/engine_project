@@ -8,6 +8,8 @@ using System.IO;
 public class SaveFile
 {
     public List<bool> checkList = new List<bool>();
+    public Floor floor = Floor.THREE;
+    public int stair = 2;
 }
 
 public class SaveManager : MonoBehaviour
@@ -19,6 +21,8 @@ public class SaveManager : MonoBehaviour
     [SerializeField]
     private string savepath;
 
+    public Transform playerTrm;
+
     private void Awake()
     {
         instance = this;
@@ -28,6 +32,7 @@ public class SaveManager : MonoBehaviour
         save = new SaveFile();
         savepath = Application.dataPath + "/Resources/SaveFile.json";
         DataLoad();
+        GameManager.instance.InitSpawn(playerTrm);
     }
 
     public void DataSave()
@@ -52,6 +57,7 @@ public class SaveManager : MonoBehaviour
             {
                 save.checkList.Add(false);
             }
+            save.floor = Floor.THREE;
             DataSave();
             Debug.Log("Add :" + save);
         }

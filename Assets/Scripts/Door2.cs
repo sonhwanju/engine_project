@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class Door2 : Door
 {
-    
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player")) {
@@ -21,6 +20,7 @@ public class Door2 : Door
                     other.transform.position = targetTrm.position;
                     fadeImg.DOFade(0, 2).OnComplete(() =>
                      {
+                         GameManager.instance.InitTwoFloor(true);
                         GameManager.instance.isFade = false;
                      });
                 });
@@ -37,6 +37,7 @@ public class Door2 : Door
                     other.transform.position = targetTrm2.position;
                     fadeImg.DOFade(0,2).OnComplete(()=>{
                         GameManager.instance.isFade = false;
+                        GameManager.instance.InitTwoFloor(false);
                     });
                 }); 
             }

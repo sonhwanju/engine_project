@@ -18,11 +18,15 @@ public class PlayerSleep : MonoBehaviour
 
     void Update()
     {
-        if(input.isFire) {
-            isSleep = true;
-        }
-        else if(input.isFireUp) {
-            isSleep = false;
+        if(SaveManager.instance.save.floor == Floor.TWO) {
+            if(input.isFire) {
+                isSleep = true;
+                GameManager.instance.score++;
+                GameManager.instance.ScoreUpdate();
+            }
+            else if(input.isFireUp) {
+                isSleep = false;
+            }   
         }
     }
 }

@@ -17,7 +17,7 @@ public class PlayerInput : MonoBehaviour
             v = Input.GetAxisRaw("Vertical");
             isSpace = Input.GetButtonDown("Jump");
             isFireDown = Input.GetButtonDown("Fire1");
-            isFireUp = Input.GetButtonDown("Fire1");
+            isFireUp = Input.GetButtonUp("Fire1");
             isFire = Input.GetButton("Fire1");
             isRun = Input.GetKey(KeyCode.LeftShift);
     }

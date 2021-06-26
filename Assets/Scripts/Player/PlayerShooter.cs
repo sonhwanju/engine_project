@@ -22,7 +22,7 @@ public class PlayerShooter : MonoBehaviour
 
     IEnumerator Shoot()
     {
-        while (GameManager.instance.floor == Floor.THREE)
+        while (SaveManager.instance.save.floor == Floor.THREE)
         {
             if(input.isFireDown)
             {

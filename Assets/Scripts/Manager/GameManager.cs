@@ -18,9 +18,6 @@ public class GameManager : MonoBehaviour
     public ArrowSwitch[] arrow;
     public Transform[] stairTrm;
     public Transform playerTrm;
-    public int stair;
-    public Floor floor = Floor.THREE;
-    public bool isBossClear = false;
 
     public GameObject boss;
     public GameObject bossBar;
@@ -31,8 +28,16 @@ public class GameManager : MonoBehaviour
     public bool isFade = false;
     public bool isOpen = false;
     public GameObject playerChild;
-    //1이면 라이트 2면 업 3이면 레프트
     public int enemy2Check = 0;
+
+    float sec = 0;
+    public int min = 0;
+    public Text timeText;
+    public Text scoreText;
+    public GameObject boss2;
+    public int score = 0;
+    public Transform[] spawnTrms;
+    public PlayerSleep sleep;
 
     private void Awake()
     {
@@ -43,8 +48,31 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        stair = 2;
         
+    }
+    public void InitTwoFloor(bool on) {
+        if(boss2 != null) {
+            boss2.SetActive(on);
+        }
+        timeText.gameObject.SetActive(on);
+        scoreText.gameObject.SetActive(on);
+        sleep.enabled = on;
+    }
+    public void InitSpawn(Transform trm) {
+        int a = (int)SaveManager.instance.save.floor;
+        trm.position = spawnTrms[a].position;
+    }
+    public void Timer() {
+        sec+=Time.deltaTime;
+
+        if(sec >= 60) {
+            sec = 0;
+            min++;
+        }
+        timeText.text = $"{min} : {(int)sec}";
+    }
+    public void ScoreUpdate() {
+        scoreText.text = $"{score} 점";
     }
 
     public void ActiveCircle(bool on) {
@@ -53,11 +81,11 @@ public class GameManager : MonoBehaviour
         playerChild.transform.parent.GetComponent<BoxCollider2D>().enabled = !on;
         playerTrm.GetComponent<Rigidbody2D>().collisionDetectionMode = on ? CollisionDetectionMode2D.Continuous : CollisionDetectionMode2D.Discrete;  
     }
-    public void BossSpawn()
+    public void BossSpawn(bool on)
     {
         //Screen.SetResolution(1080, 1920, true);
-        boss.SetActive(true);
-        bossBar.SetActive(true);
+        boss.SetActive(on);
+        bossBar.SetActive(on);
     }
 
     void OnApplicationQuit()
@@ -83,60 +111,23 @@ public class GameManager : MonoBehaviour
     }
     public void StairChange()
     {
-
-        // if(arrow[0].isUp)
-        // {
-        //     if(floor == Floor.ONE)
-        //     {
-        //         stair = 1;
-        //         floor = Floor.TWO;
-        //     }
-        //     else if(floor == Floor.TWO)
-        //     {
-        //         stair = 2;
-        //         floor = Floor.THREE;
-        //     }
-            
-        // }
-        // else
-        // {
-        //     if(floor == Floor.THREE)
-        //     {
-        //         stair = 1;
-        //         floor = Floor.TWO;
-        //     }
-        //     else if(floor == Floor.TWO)
-        //     {
-        //         stair = 0;
-        //         floor = Floor.ONE;
-        //     }
-        // }
-        // playerTrm.position = stairTrm[stair].position;
         if(SaveManager.instance.save.checkList[0]) {
             if(!arrow[0].isUp)
             {
-                if(stair > 1) {
-                    stair--;
-                    floor--;
-                    playerTrm.position = stairTrm[stair].position;
+                if(SaveManager.instance.save.stair > 1) {
+                    SaveManager.instance.save.stair--;
+                    SaveManager.instance.save.floor++;
+                    playerTrm.position = stairTrm[SaveManager.instance.save.stair].position;
                 }
-                else if(stair > 0) {
+                else if(SaveManager.instance.save.stair > 0) {
                     if(SaveManager.instance.save.checkList[1]) {
-                        stair--;
-                        floor--;
-                        playerTrm.position = stairTrm[stair].position;
+                        SaveManager.instance.save.stair--;
+                        SaveManager.instance.save.floor++;
+                        playerTrm.position = stairTrm[SaveManager.instance.save.stair].position;
                     }
                 }
             }
         }
-
-        // if(arrow[0].isUp && stair < 2)
-        // {
-        //    stair++;
-        //    floor++;
-        //    playerTrm.position = stairTrm[stair].position;
-        // }
-
         
     }
 }
