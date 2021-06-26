@@ -14,7 +14,7 @@ public class Enemy1 : MonoBehaviour,IDamageable
 {
     [SerializeField]
     private int hp;
-    private int maxHp = 500;
+    private int maxHp = 350;
 
     private WaitForSeconds w = new WaitForSeconds(0.15f);
     private WaitForSeconds ws = new WaitForSeconds(0.5f);

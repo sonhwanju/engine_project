@@ -54,6 +54,7 @@ public class Door : MonoBehaviour
             else
             {
                 GameManager.instance.isFade = true;
+                other.GetComponent<CircleCollider2D>().enabled = false;
                 fadeImg.DOFade(1,2).OnComplete(()=> {
                     // for (int i = 0; i < doorBox.Length; i++)
                     // {

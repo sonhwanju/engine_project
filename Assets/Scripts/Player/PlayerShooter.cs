@@ -9,11 +9,13 @@ public class PlayerShooter : MonoBehaviour
 
     public GameObject bulletPrefab;
     public Transform poolTrm;
+    public AudioSource audioSource;
 
     private void Awake()
     {
         input = GetComponent<PlayerInput>();
         PoolManager.CreatePool<Bullet>(bulletPrefab,poolTrm,20);
+        audioSource = GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -26,6 +28,7 @@ public class PlayerShooter : MonoBehaviour
         {
             if(input.isFireDown)
             {
+                audioSource.Play();
                 for(int i = -1; i < 2; i++) {
                     Bullet obj = PoolManager.GetItem<Bullet>();
                     obj.transform.position = transform.position + new Vector3(i * 0.3f,0,0);

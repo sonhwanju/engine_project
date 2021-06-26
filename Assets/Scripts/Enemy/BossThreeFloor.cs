@@ -9,6 +9,7 @@ public class BossThreeFloor : MonoBehaviour
 
     public Dictionary<string,string> answerDic = new Dictionary<string, string>();
     public List<string> examList = new List<string>();
+    public List<string> replaceExamList = new List<string>();
     public List<string> answerList = new List<string>();
     public Text examText;
     public Text answerText;
@@ -19,21 +20,24 @@ public class BossThreeFloor : MonoBehaviour
     public GameObject colObj;
     public void Awake()
     {
-        examCount = examList.Count;
+        for(int i = 0; i < examList.Count; i++) {
+            replaceExamList.Add(examList[i].Replace("\\n","\n"));
+        }
+        examCount = replaceExamList.Count;
         answerCount = 0;
-        for(int i = 0; i < examList.Count;i++) {
-            answerDic.Add(answerList[i],examList[i]);
+        for(int i = 0; i < replaceExamList.Count;i++) {
+            answerDic.Add(answerList[i],replaceExamList[i]);
         }
         AnswerSwapRight();
         Exam();
     }
 
     public void Exam() {
-        if(examList.Count > 0) {
+        if(replaceExamList.Count > 0) {
             random = Random.Range(0,examCount);
             examCount--;
-            string s = examList[random];
-            examList.Remove(s);
+            string s = replaceExamList[random];
+            replaceExamList.Remove(s);
 
             examText.text = s;
         }
