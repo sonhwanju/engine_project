@@ -62,4 +62,23 @@ public class SaveManager : MonoBehaviour
             Debug.Log("Add :" + save);
         }
     }
+    public void DataInit() {
+        if(File.Exists(savepath)) {
+            save.checkList.RemoveAll(x => true);
+            for (int i = 0; i < 3; i++)
+            {
+                save.checkList.Add(false);
+            }
+            save.floor = Floor.THREE;
+            DataSave();
+        }
+        // else {
+        //     for (int i = 0; i < 3; i++)
+        //     {
+        //         save.checkList.Add(false);
+        //     }
+        //     save.floor = Floor.THREE;
+        //     DataSave();
+        // }
+    }
 }

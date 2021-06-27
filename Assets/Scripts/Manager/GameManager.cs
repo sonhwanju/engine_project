@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject boss3;
     public PlayerAnswer answer;
+    public Text floorText;
 
     private void Awake()
     {
@@ -51,7 +52,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+        Screen.SetResolution(1920,1080, true);
+        FloorT();
     }
     public void InitTwoFloor(bool on) {
         if(boss2 != null) {
@@ -90,7 +92,6 @@ public class GameManager : MonoBehaviour
     }
     public void BossSpawn(bool on)
     {
-        //Screen.SetResolution(1080, 1920, true);
         boss.SetActive(on);
         bossBar.SetActive(on);
     }
@@ -134,7 +135,12 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
+            FloorT();
         }
         
     }
+    public void FloorT() {
+        floorText.text = $"{(int)SaveManager.instance.save.floor + 1}f";
+    }   
 }
+
