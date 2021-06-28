@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour,IDamageable
 {
-    public int hp = 10;
-    private int maxHp = 10;
+    public int hp = 8;
+    private int maxHp = 8;
     public bool isHit = false;
     public bool isDead = false;
     private string s = "HitChange";
@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     void Awake()
     {
         animator = GetComponent<Animator>();
+        hp = maxHp;
     }
 
     void Update()

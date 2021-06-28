@@ -1239,7 +1239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88936ec7bba695145b410e4c7b50c2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
+  hp: 8
   isHit: 0
   isDead: 0
   hpBar: {fileID: 1827584974}

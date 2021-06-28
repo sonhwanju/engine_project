@@ -128,28 +128,9 @@ public class GameManager : MonoBehaviour
     {
         SaveManager.instance.DataSave();
     }
-
-
-    // public void SwitchArrowSprite()
-    // {
-    //     arrow[0].isUp = !arrow[0].isUp;
-    //     for (int i = 0; i < arrow.Length; i++)
-    //     {
-    //         if (!arrow[0].isUp)
-    //         {
-    //             arrow[i].spriteRenderer.sprite = arrow[i].sprites[0];
-    //         }
-    //         else
-    //         {
-    //             arrow[i].spriteRenderer.sprite = arrow[i].sprites[1];
-    //         }
-    //     }
-    // }
     public void StairChange()
     {
-        //Debug.Log("발동은 됨");
         if(SaveManager.instance.save.checkList[0]) {
-            //Debug.Log("0");
             if(SaveManager.instance.save.stair > 1) {
                 SaveManager.instance.save.stair--;
                 SaveManager.instance.save.floor++;

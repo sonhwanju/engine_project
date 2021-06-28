@@ -8,11 +8,7 @@ public class PlayerCol : MonoBehaviour
     {
         if (other.CompareTag("Stair"))
         {
-            //Debug.Log("ontrigger");
             GameManager.instance.StairChange();
-        }
-        if(other.CompareTag("Exit")) {
-            //게임 클리어
         }
     }
 

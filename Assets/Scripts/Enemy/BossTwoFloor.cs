@@ -31,11 +31,7 @@ public class BossTwoFloor : MonoBehaviour
         StartCoroutine(Move());
         seq = DOTween.Sequence();
     }
-
-    void OnEnable()
-    {
-       
-    }
+    
     void Update()
     {
         if(SaveManager.instance.save.floor == Floor.TWO) {

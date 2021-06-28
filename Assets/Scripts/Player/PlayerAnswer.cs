@@ -8,7 +8,6 @@ public class PlayerAnswer : MonoBehaviour
     private PlayerInput input;
     private PlayerShooter shooter;
     public AudioClip clip;
-    public AudioClip clip2;
     void Awake()
     {
         input = GetComponent<PlayerInput>();
@@ -32,8 +31,7 @@ public class PlayerAnswer : MonoBehaviour
             boss.AnswerSwapLeft();
             PlaySound();
         }
-
-        if(input.isSpace) {
+        else if(input.isSpace) {
             boss.ExamAnswer();
         }
     }

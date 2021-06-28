@@ -16,7 +16,6 @@ public class BloodEffect : MonoBehaviour
         transform.position = position;
         particle.Play();
         Invoke("SetDisable", 3f);
-
     }
 
     private void SetDisable()
