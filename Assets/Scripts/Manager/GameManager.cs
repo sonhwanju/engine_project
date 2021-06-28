@@ -45,13 +45,14 @@ public class GameManager : MonoBehaviour
     public PlayerAnswer answer;
     public Text floorText;
     public GameObject exitPanel;
+    public AudioSource audioSource;
 
     private void Awake()
     {
         instance = this;
         PoolManager.CreatePool<BloodEffect>(bloodEffect,poolTrm);
         isOpen = false;
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -129,21 +130,21 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void SwitchArrowSprite()
-    {
-        arrow[0].isUp = !arrow[0].isUp;
-        for (int i = 0; i < arrow.Length; i++)
-        {
-            if (!arrow[0].isUp)
-            {
-                arrow[i].spriteRenderer.sprite = arrow[i].sprites[0];
-            }
-            else
-            {
-                arrow[i].spriteRenderer.sprite = arrow[i].sprites[1];
-            }
-        }
-    }
+    // public void SwitchArrowSprite()
+    // {
+    //     arrow[0].isUp = !arrow[0].isUp;
+    //     for (int i = 0; i < arrow.Length; i++)
+    //     {
+    //         if (!arrow[0].isUp)
+    //         {
+    //             arrow[i].spriteRenderer.sprite = arrow[i].sprites[0];
+    //         }
+    //         else
+    //         {
+    //             arrow[i].spriteRenderer.sprite = arrow[i].sprites[1];
+    //         }
+    //     }
+    // }
     public void StairChange()
     {
         //Debug.Log("발동은 됨");

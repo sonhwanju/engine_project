@@ -10,6 +10,7 @@ public class Exit : MonoBehaviour
         if(other.CompareTag("Player")) {
             if(SaveManager.instance.save.checkList[2]) {
                 //클리어
+                Time.timeScale = 0;
                 clearPanel.SetActive(true);
             }
         }

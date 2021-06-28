@@ -19,10 +19,12 @@ public class BossThreeFloor : MonoBehaviour
     private int answerCount;
     public Door3 door;
     public GameObject colObj;
-    private Sequence seq;
+    private string temp;
+    public PlayerShooter shooter;
+    public AudioClip clip;
+    public AudioClip clip2;
     public void Awake()
     {
-        seq = DOTween.Sequence();
         for(int i = 0; i < examList.Count; i++) {
             replaceExamList.Add(examList[i].Replace("\\n","\n"));
         }
@@ -40,11 +42,17 @@ public class BossThreeFloor : MonoBehaviour
             random = Random.Range(0,examCount);
             examCount--;
             string s = replaceExamList[random];
+            temp = s;
             replaceExamList.Remove(s);
-            seq.Kill();
-            seq.Append(examText.DOText(s,1f));
+            examText.DOKill();
+            examText.text = "";
+            GameManager.instance.audioSource.Play();
+            examText.DOText(s,5f).OnComplete(() =>{
+                GameManager.instance.audioSource.Stop();
+            });
         }
         else {
+            examText.DOKill();
             answerText.text = "";
             examText.text = "";
             //for (int i = 0; i < door.doorBox.Length; i++)
@@ -72,14 +80,18 @@ public class BossThreeFloor : MonoBehaviour
     public void ExamAnswer() {
         if(answerDic.Count > 0) {
             string s = answerText.text;
-            if(answerDic[s] == examText.text) {
+            if(answerDic[s] == temp) {
                 answerDic.Remove(s);
                 answerList.Remove(s);
                 AnswerSwapRight();
                 Exam();
+                shooter.audioSource.clip = clip;
+                shooter.audioSource.Play();
             }
             else if(answerDic[s] != examText.text) {
                 health.OnDamage(1);
+                shooter.audioSource.clip = clip2;
+                shooter.audioSource.Play();
             }
         }
         // else {

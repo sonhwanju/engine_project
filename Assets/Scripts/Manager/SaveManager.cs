@@ -34,6 +34,10 @@ public class SaveManager : MonoBehaviour
         DataLoad();
         GameManager.instance.InitSpawn(playerTrm);
         GameManager.instance.FloorT();
+
+        if(save.checkList[0]) {
+            playerTrm.GetComponent<CircleCollider2D>().enabled = false;
+        }
     }
 
     public void DataSave()

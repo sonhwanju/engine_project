@@ -34,8 +34,6 @@ public class PlayerAnswer : MonoBehaviour
         }
 
         if(input.isSpace) {
-            shooter.audioSource.clip = clip2;
-            shooter.audioSource.Play();
             boss.ExamAnswer();
         }
     }

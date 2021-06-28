@@ -17,6 +17,9 @@ public class StartSceneUI : MonoBehaviour
         adPanel.SetActive(true);
         isOpen = true;
     }
+    public void Quit() {
+        Application.Quit();
+    }
 
     void Update()
     {
