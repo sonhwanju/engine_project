@@ -26,7 +26,7 @@ public class PlayerSleep : MonoBehaviour
     void Update()
     {
         if(SaveManager.instance.save.floor == Floor.TWO) {
-            if(input.isFire) {
+            if(input.isFire && !input.isEsc) {
                 isSleep = true;
                 GameManager.instance.score++;
                 if(!shooter.audioSource.isPlaying) {

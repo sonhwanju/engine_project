@@ -13,6 +13,7 @@ public class PlayerInput : MonoBehaviour
     public bool isHelp;
     public bool isRight;
     public bool isLeft;
+    public bool isEsc;
 
     private void Update()
     {
@@ -26,5 +27,6 @@ public class PlayerInput : MonoBehaviour
         isHelp = Input.GetKeyDown(KeyCode.K);
         isRight = Input.GetKeyDown(KeyCode.Slash);
         isLeft = Input.GetKeyDown(KeyCode.Period);
+        isEsc = Input.GetKeyDown(KeyCode.Escape);
     }
 }

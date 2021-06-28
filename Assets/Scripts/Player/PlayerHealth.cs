@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     private string hitAnim = "hit";
     private Animator animator;
     public HpBar hpBar;
+    public GameObject gameOverPanel;
 
     void Awake()
     {
@@ -49,6 +50,8 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     public void Die() {
         //죽었을때 해야할 것을 추가해야한다.
         isDead = true;
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void HitChange() {

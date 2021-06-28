@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class BossThreeFloor : MonoBehaviour
 {
@@ -18,8 +19,10 @@ public class BossThreeFloor : MonoBehaviour
     private int answerCount;
     public Door3 door;
     public GameObject colObj;
+    private Sequence seq;
     public void Awake()
     {
+        seq = DOTween.Sequence();
         for(int i = 0; i < examList.Count; i++) {
             replaceExamList.Add(examList[i].Replace("\\n","\n"));
         }
@@ -38,8 +41,8 @@ public class BossThreeFloor : MonoBehaviour
             examCount--;
             string s = replaceExamList[random];
             replaceExamList.Remove(s);
-
-            examText.text = s;
+            seq.Kill();
+            seq.Append(examText.DOText(s,1f));
         }
         else {
             answerText.text = "";

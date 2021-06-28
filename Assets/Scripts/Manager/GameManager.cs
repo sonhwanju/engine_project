@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum Floor
 {
@@ -38,10 +39,12 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public Transform[] spawnTrms;
     public PlayerSleep sleep;
+    public PlayerInput input;
 
     public GameObject boss3;
     public PlayerAnswer answer;
     public Text floorText;
+    public GameObject exitPanel;
 
     private void Awake()
     {
@@ -55,6 +58,30 @@ public class GameManager : MonoBehaviour
         Screen.SetResolution(1920,1080, true);
         FloorT();
     }
+    void Update()
+    {
+        if(input.isEsc) {
+            EscDown();
+        }
+    }
+
+    public void ReStart() {
+        Time.timeScale = 1;
+        SaveManager.instance.DataInit();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void EscDown() {
+        exitPanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void Exit() {
+        Application.Quit();
+    }
+    public void NoExit() {
+        Time.timeScale = 1;
+        exitPanel.SetActive(false);
+    }
+
     public void InitTwoFloor(bool on) {
         if(boss2 != null) {
             boss2.SetActive(on);

@@ -26,7 +26,7 @@ public class PlayerShooter : MonoBehaviour
     {
         while (SaveManager.instance.save.floor == Floor.THREE)
         {
-            if(input.isFireDown)
+            if(input.isFireDown && !input.isEsc)
             {
                 audioSource.Play();
                 for(int i = -1; i < 2; i++) {
