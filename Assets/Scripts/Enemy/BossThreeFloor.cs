@@ -12,6 +12,7 @@ public class BossThreeFloor : MonoBehaviour
     public List<string> examList = new List<string>();
     public List<string> replaceExamList = new List<string>();
     public List<string> answerList = new List<string>();
+    //public string[,] str;
     public Text examText;
     public Text answerText;
     private int random;
@@ -25,6 +26,7 @@ public class BossThreeFloor : MonoBehaviour
     public AudioClip clip2;
     public void Awake()
     {
+        //str = new string[answerList.Count - 1, 10];
         for(int i = 0; i < examList.Count; i++) {
             replaceExamList.Add(examList[i].Replace("\\n","\n"));
         }
@@ -36,7 +38,6 @@ public class BossThreeFloor : MonoBehaviour
         AnswerSwapRight();
         Exam();
     }
-
     public void Exam() {
         if(replaceExamList.Count > 0) {
             random = Random.Range(0,examCount);

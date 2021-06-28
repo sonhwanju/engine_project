@@ -136,7 +136,7 @@ public class Enemy1 : MonoBehaviour,IDamageable
     //사용
     IEnumerator SpawnEnemy() {
         while(true) {
-            if(boss == Boss.PHASETWO) { //나중에 페이즈2일때만으로 교체해준다
+            if(boss == Boss.PHASETWO) {
                 Enemy2 enemy = PoolManager.GetItem<Enemy2>();
                 //이제 어디서 생성될지 정해줘야한다.
                 enemy.transform.position = enemySpawnTrm[GameManager.instance.enemy2Check].position;
@@ -148,7 +148,7 @@ public class Enemy1 : MonoBehaviour,IDamageable
                     for(int i = 0; i < 4; i++) {
                         enemyBullet enBullet = PoolManager.GetItem<enemyBullet>();
                         enBullet.SetSpeed(enemySpeed);
-                        enemySpeed = Random.Range(5,15);
+                        enemySpeed = Random.Range(5,10);
                         enBullet.transform.position = enemy.transform.position;
                         enBullet.transform.rotation = Quaternion.Euler(0,0, (i * 90));
                     }

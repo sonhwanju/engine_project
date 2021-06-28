@@ -9,8 +9,8 @@ public class BossTwoFloor : MonoBehaviour
     public Transform targetTrm;
     public Vector2 myTrm;
     public float radius = 10f;
-    private WaitForSeconds ws = new WaitForSeconds(1.5f);
-    private WaitForSeconds w = new WaitForSeconds(.8f);
+    private WaitForSeconds ws = new WaitForSeconds(1.2f);
+    private WaitForSeconds w = new WaitForSeconds(.6f);
     private WaitForSeconds zerotwo = new WaitForSeconds(0.2f);
 
     private Animator animator;
@@ -42,7 +42,7 @@ public class BossTwoFloor : MonoBehaviour
             GameManager.instance.Timer();
         }
 
-        if(GameManager.instance.score >= 10000 && !isDead) {
+        if(GameManager.instance.score >= 20000 && !isDead) {
             isDead = true;
             SaveManager.instance.save.checkList[1] = true;
             //for (int i = 0; i < door.doorBox.Length; i++)
