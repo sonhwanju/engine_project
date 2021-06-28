@@ -33,13 +33,14 @@ public class SaveManager : MonoBehaviour
         savepath = Application.dataPath + "/Resources/SaveFile.json";
         DataLoad();
         GameManager.instance.InitSpawn(playerTrm);
+        GameManager.instance.FloorT();
     }
 
     public void DataSave()
     {
         string jsonData = JsonUtility.ToJson(save);
         File.WriteAllText(savepath, jsonData);
-        Debug.Log("save : " + save);
+        //Debug.Log("save : " + save);
     }
 
     public void DataLoad()
@@ -49,27 +50,19 @@ public class SaveManager : MonoBehaviour
         {
             string fromJsonData = File.ReadAllText(savepath);
             save = JsonUtility.FromJson<SaveFile>(fromJsonData);
-            Debug.Log("Load :" + save);
+            //Debug.Log("Load :" + save);
         }
         else
         {
-            for (int i = 0; i < 3; i++)
-            {
-                save.checkList.Add(false);
-            }
-            save.floor = Floor.THREE;
+            Data();
             DataSave();
-            Debug.Log("Add :" + save);
+            //Debug.Log("Add :" + save);
         }
     }
     public void DataInit() {
         if(File.Exists(savepath)) {
             save.checkList.RemoveAll(x => true);
-            for (int i = 0; i < 3; i++)
-            {
-                save.checkList.Add(false);
-            }
-            save.floor = Floor.THREE;
+            Data();
             DataSave();
         }
         // else {
@@ -80,5 +73,14 @@ public class SaveManager : MonoBehaviour
         //     save.floor = Floor.THREE;
         //     DataSave();
         // }
+    }
+
+    public void Data() {
+        for (int i = 0; i < 3; i++)
+        {
+            save.checkList.Add(false);
+        }
+        save.floor = Floor.THREE;
+        save.stair = 2;
     }
 }

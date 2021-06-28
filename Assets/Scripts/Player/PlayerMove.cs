@@ -29,8 +29,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!GameManager.instance.isFade)
-            rigid.velocity = new Vector2(input.h, input.v) * speed;
+        rigid.velocity = new Vector2(input.h, input.v) * speed;
     }
     private void Keys()
     {

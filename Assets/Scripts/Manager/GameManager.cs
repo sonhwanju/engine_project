@@ -51,12 +51,12 @@ public class GameManager : MonoBehaviour
         instance = this;
         PoolManager.CreatePool<BloodEffect>(bloodEffect,poolTrm);
         isOpen = false;
+        
     }
 
     private void Start()
     {
         Screen.SetResolution(1920,1080, true);
-        FloorT();
     }
     void Update()
     {
@@ -146,20 +146,19 @@ public class GameManager : MonoBehaviour
     }
     public void StairChange()
     {
+        //Debug.Log("발동은 됨");
         if(SaveManager.instance.save.checkList[0]) {
-            if(!arrow[0].isUp)
-            {
-                if(SaveManager.instance.save.stair > 1) {
+            //Debug.Log("0");
+            if(SaveManager.instance.save.stair > 1) {
+                SaveManager.instance.save.stair--;
+                SaveManager.instance.save.floor++;
+                playerTrm.position = stairTrm[SaveManager.instance.save.stair].position;
+            }
+            else if(SaveManager.instance.save.stair > 0) {
+                if(SaveManager.instance.save.checkList[1]) {
                     SaveManager.instance.save.stair--;
                     SaveManager.instance.save.floor++;
                     playerTrm.position = stairTrm[SaveManager.instance.save.stair].position;
-                }
-                else if(SaveManager.instance.save.stair > 0) {
-                    if(SaveManager.instance.save.checkList[1]) {
-                        SaveManager.instance.save.stair--;
-                        SaveManager.instance.save.floor++;
-                        playerTrm.position = stairTrm[SaveManager.instance.save.stair].position;
-                    }
                 }
             }
             FloorT();
@@ -167,7 +166,7 @@ public class GameManager : MonoBehaviour
         
     }
     public void FloorT() {
-        floorText.text = $"{(int)SaveManager.instance.save.floor + 1}f";
+        floorText.text = $"{(int)SaveManager.instance.save.stair + 1}f";
     }   
 }
 
