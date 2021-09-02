@@ -122,6 +122,7 @@ public class Enemy1 : MonoBehaviour,IDamageable
             SaveManager.instance.DataSave();
             doorObj.SetActive(true);
             GameManager.instance.bossBar.SetActive(false);
+            poolTrm.gameObject.SetActive(false);
             animator.Play(DeadToHash);
             Invoke("SetAct",0.5f);
         }

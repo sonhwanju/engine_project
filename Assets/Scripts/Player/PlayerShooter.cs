@@ -10,6 +10,7 @@ public class PlayerShooter : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform poolTrm;
     public AudioSource audioSource;
+    public HelpUI ui;
 
     private void Awake()
     {
@@ -26,7 +27,7 @@ public class PlayerShooter : MonoBehaviour
     {
         while (SaveManager.instance.save.floor == Floor.THREE)
         {
-            if(input.isFireDown && !input.isEsc)
+            if(input.isFireDown && !input.isEsc && !ui.isOpen)
             {
                 audioSource.Play();
                 for(int i = -1; i < 2; i++) {

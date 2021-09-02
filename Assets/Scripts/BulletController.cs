@@ -13,10 +13,11 @@ public class BulletController : MonoBehaviour
         }
 
         IDamageable id = other.GetComponent<IDamageable>();
-        if(id!= null) {
+        if(id != null) {
             id.OnDamage(damage);
             BloodEffect effect = PoolManager.GetItem<BloodEffect>();
-            effect.ResetPosition(other.transform.position);
+            if(other != null)
+                effect.ResetPosition(other.transform.position);
             gameObject.SetActive(false);
         }
     }

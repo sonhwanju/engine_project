@@ -24,6 +24,10 @@ public class HelpUI : MonoBehaviour
         }
         isOpen = !isOpen;
     }
+    public void ExitHelp() {
+        floorPanel.SetActive(false);
+        isOpen = false;
+    }
 
     void Update()
     {

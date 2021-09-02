@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
     }
     public void StairChange()
     {
-        if(SaveManager.instance.save.checkList[0]) {
+        if (SaveManager.instance.save.checkList[0]) {
             if(SaveManager.instance.save.stair > 1) {
                 SaveManager.instance.save.stair--;
                 SaveManager.instance.save.floor++;

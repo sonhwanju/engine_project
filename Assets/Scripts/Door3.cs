@@ -29,6 +29,8 @@ public class Door3 : Door
             else
             {
                 GameManager.instance.isFade = true;
+                GameManager.instance.InitThreeFloor(false);
+
                 fadeImg.DOFade(1,2).OnComplete(()=> {
                     //for (int i = 0; i < doorBox.Length; i++)
                     //{
@@ -36,7 +38,6 @@ public class Door3 : Door
                     //}
                     other.transform.position = targetTrm2.position;
                     fadeImg.DOFade(0,2).OnComplete(()=>{
-                        GameManager.instance.InitThreeFloor(false);
                         GameManager.instance.isFade = false;
                     });
                 }); 
